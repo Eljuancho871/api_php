@@ -32,6 +32,16 @@ class Personas {
         self::$connection = "";
         return $query -> fetchAll();
     }
+
+    final static function persona_post($body){
+
+        self::$connection = Connect::connect_db();
+        $query = self::$connection -> query("INSERT INTO `personas` (id, nombre, edad) 
+                                    VALUES (NULL, )");
+        self::$connection = "";
+        return $query -> fetchAll();
+    }
+
 }
 
 

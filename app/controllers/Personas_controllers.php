@@ -23,11 +23,17 @@ if ($url[4] == "personas"){
 
         if($id !== false){
 
+            print_r(Personas::persona_delete($id));
             echo "registro con el id ".$id." eliminado correctamente";
         }else{
 
             echo "No se puede eliminar todos los datos";
         }
+    }
+
+    if($_SERVER["REQUEST_METHOD"] === "PUT"){
+
+        print_r(file_get_contents());
     }
 
 }else{
