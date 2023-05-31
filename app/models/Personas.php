@@ -21,6 +21,15 @@ class Personas {
         self::$connection = Connect::connect_db();
         $query = self::$connection -> query("SELECT * FROM `personas` WHERE id = $id");
         self::$connection = "";
+        $data = $query -> fetchAll();
+        return (count($data) <= 0) ? ["msg" => "error al obtener el registro"] : $data;
+    }
+
+    final static function persona_delete($id){
+
+        self::$connection = Connect::connect_db();
+        $query = self::$connection -> query("DELETE FROM `personas` WHERE id = $id");
+        self::$connection = "";
         return $query -> fetchAll();
     }
 }
