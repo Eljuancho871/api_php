@@ -3,12 +3,13 @@
 
 namespace app\models;
 require_once "./auto_load.php";
+require_once "./app/interfaces/PersonaI.php";
 use app\database\Connect;
 
-class Personas {
+class Personas implements \PersonasI {
 
     private static $connection;
-    final static function personas_get(){
+    final static function personas_get(): array{
 
         self::$connection = Connect::connect_db();
         $query = self::$connection -> query("SELECT * FROM `personas`");
@@ -16,7 +17,7 @@ class Personas {
         return $query -> fetchAll();
     }
 
-    final static function persona_get($id){
+    final static function persona_get(int $id): array{
 
         self::$connection = Connect::connect_db();
         $query = self::$connection -> query("SELECT * FROM `personas` WHERE id = $id");
@@ -25,7 +26,7 @@ class Personas {
         return (count($data) <= 0) ? ["msg" => "error al obtener el registro"] : $data;
     }
 
-    final static function persona_delete($id){
+    final static function persona_delete(int $id): array{
 
         self::$connection = Connect::connect_db();
         $query = self::$connection -> query("DELETE FROM `personas` WHERE id = $id");
@@ -33,7 +34,7 @@ class Personas {
         return $query -> fetchAll();
     }
 
-    final static function persona_post($body){
+    final static function persona_post(array $body): array{
 
         if(isset($body["nombre"]) && isset($body["edad"])){
 
@@ -49,7 +50,7 @@ class Personas {
         return ["msg" => "datos mal enviados"];
     }
 
-    final static function persona_put($body, $id){
+    final static function persona_put(array $body, int $id): array{
 
         if(isset($body["nombre"]) && isset($body["edad"])){
 
