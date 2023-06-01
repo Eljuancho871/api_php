@@ -49,6 +49,26 @@ class Personas {
         return ["msg" => "datos mal enviados"];
     }
 
+    final static function persona_put($body){
+
+        if(isset($body["nombre"]) && isset($body["edad"]) && isset($body["id"])){
+
+            self::$connection = Connect::connect_db();
+            $nombre = $body["nombre"];
+            $edad = $body["edad"];
+            $id = $body["id"];
+            
+            self::$connection -> query("UPDATE `personas` 
+                SET nombre = '$nombre', edad = '$edad' WHERE id = $id");
+
+            self::$connection = "";
+            return ["msg" => "acualizado correctamente"];
+        }
+
+        return ["msg" => "no se pudo hacer la actualizacion del registro :("];
+        
+    }
+
 }
 
 

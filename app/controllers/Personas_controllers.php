@@ -38,6 +38,12 @@ if ($url[4] == "personas"){
         
     }
 
+    if($_SERVER["REQUEST_METHOD"] === "PUT" ){
+
+        $body = file_get_contents("php://input");
+        echo json_encode(Personas::persona_put(json_decode($body, true)));
+    }
+
 }else{
 
     exit("EndPoint no encontrado:(");
