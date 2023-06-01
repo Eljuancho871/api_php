@@ -49,15 +49,14 @@ class Personas {
         return ["msg" => "datos mal enviados"];
     }
 
-    final static function persona_put($body){
+    final static function persona_put($body, $id){
 
-        if(isset($body["nombre"]) && isset($body["edad"]) && isset($body["id"])){
+        if(isset($body["nombre"]) && isset($body["edad"])){
 
             self::$connection = Connect::connect_db();
             $nombre = $body["nombre"];
             $edad = $body["edad"];
-            $id = $body["id"];
-            
+
             self::$connection -> query("UPDATE `personas` 
                 SET nombre = '$nombre', edad = '$edad' WHERE id = $id");
 
